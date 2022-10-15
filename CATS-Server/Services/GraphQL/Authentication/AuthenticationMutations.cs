@@ -38,7 +38,7 @@ namespace CATS_Server.Services.GraphQL
         {
             var username = contextAccessor.HttpContext.Request.Headers["THY-LOGINNAME"].FirstOrDefault();
 #if DEBUG
-            username = "E_YIGIT2";
+            username = "A_BEYDEMIR";
 #endif
             var user = dbContext.USERS.Where(u => u.Username == username)
                 .Include(u => u.Roles)

@@ -16,7 +16,7 @@ namespace CATS_Server.Models.Entities
         public string JobTitle { get; set; }
 
         public string Email { get; set; }
-        public string Extension { get; set; }
+
         public int? LanguageId { get; set; }
       
         public bool? Locked { get; set; }

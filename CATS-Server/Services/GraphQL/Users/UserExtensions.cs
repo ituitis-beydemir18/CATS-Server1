@@ -40,10 +40,12 @@ namespace CATS_Server.Services.GraphQL
         /// <returns></returns>
         /// //[Authorize(Roles = new[] { "Admin" })]****************************************
         [UseDbContext(typeof(ApplicationDbContext))]
-        [UseProjection]
-        [UseSorting]
-        [UseFiltering]
         [UsePaging]
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+
+
         public IQueryable<Request> GetReviewerRequestsbyUser([Parent] User user, [ScopedService] ApplicationDbContext dbContext)
         {
             return dbContext.REQUESTS.Where(r => r.ReviewerId == user.Id);
@@ -58,10 +60,10 @@ namespace CATS_Server.Services.GraphQL
         /// <returns></returns>
         /// //[Authorize(Roles = new[] { "Admin" })]****************************************
         [UseDbContext(typeof(ApplicationDbContext))]
-        [UseProjection]
-        [UseSorting]
-        [UseFiltering]
         [UsePaging]
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Request> GetRequesterRequestsbyUser([Parent] User user, [ScopedService] ApplicationDbContext dbContext)
         {
             return dbContext.REQUESTS.Where(r => r.RequesterId == user.Id);

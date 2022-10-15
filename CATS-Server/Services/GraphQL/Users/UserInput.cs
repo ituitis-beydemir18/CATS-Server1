@@ -18,9 +18,9 @@ namespace CATS_Server.Services.GraphQL
         public string JobTitle { get; set; }
         public string Email { get; set; }
         public int? LanguageId { get; set; }
-        public int? AirportId { get; set; }
+
         public bool? Locked { get; set; }
         public List<int> Roles { get; set; }
-        public List<int> Airports { get; set; }
+
     }
 }

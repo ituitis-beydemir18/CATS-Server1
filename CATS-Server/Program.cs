@@ -65,7 +65,7 @@ app.UseHttpsRedirection();
 // Serve SPA Static files with HTTPS redirection
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseSpaStaticFiles();
+//app.UseSpaStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();
