@@ -37,7 +37,7 @@ namespace CATS_Server.Services.GraphQL
         [UseDbContext(typeof(ApplicationDbContext))]
         public bool SaveAccountPreferences(AccountPreferencesInput input, [Service] IHttpContextAccessor contextAccessor, [ScopedService] ApplicationDbContext dbContext)
         {
-            var currentUserId = contextAccessor.HttpContext.User;
+            var currentUserId = contextAccessor.HttpContext.User.GetId();
             var user = dbContext.USERS.Find(currentUserId);
             if (user != null)
             {
