@@ -1,0 +1,129 @@
+<mat-card>
+  <mat-card-header>
+    <ngx-avatar mat-card-avatar></ngx-avatar>
+    <mat-card-title
+      >{{ "ManagePassengerTypes.Title" | translate }}</mat-card-title
+    >
+    <mat-card-subtitle
+      >{{ "ManagePassengerTypes.Subtitle" | translate }}</mat-card-subtitle
+    >
+    <div fxFlex fxLayoutAlign="end center">
+      <div *ngIf="!pageLoading">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon fontSet="material-symbols-outlined">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon fontSet="material-symbols-outlined">get_app</mat-icon>
+            <span class="mat-body-1"
+              >{{ "Export to Excel File (*.xls)" | translate }}</span
+            >
+          </button>
+        </mat-menu>
+      </div>
+      <div *ngIf="pageLoading">
+        <mat-spinner diameter="20"></mat-spinner>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content [hidden]="pageLoading">
+    <div>
+      <div fxLayout="row wrap">
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
+          <button mat-button (click)="refresh()" [disabled]="loading">
+            <mat-icon fontSet="material-symbols-outlined">refresh</mat-icon>
+            {{ "Refresh" | translate }}
+          </button>
+          <button mat-button (click)="edit()">
+            <mat-icon fontSet="material-symbols-outlined">playlist_add</mat-icon>
+            {{ "New Passenger Type" | translate }}
+          </button>
+          <button mat-button disabled>
+            <mat-icon fontSet="material-symbols-outlined">filter_list</mat-icon>
+            {{ "Advanced Search" | translate }}
+          </button>
+        </div>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
+          <mat-form-field required>
+            <input
+              matInput
+              [formControl]="keyword"
+              [value]="keyword.value"
+              (keyup.enter)="filter()"
+              placeholder="{{ 'Keywords' | translate }}"
+              class="suffixOffset"
+              type="search"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              [hidden]="!keyword.value || loading"
+              (click)="clearSearchBox()"
+            >
+              <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+            </button>
+            <mat-spinner
+              [hidden]="!loading"
+              diameter="15"
+              matSuffix
+            ></mat-spinner>
+            <mat-label>
+              <mat-icon fontSet="material-symbols-outlined">search</mat-icon>
+              {{ "Filter Records" | translate }}
+            </mat-label>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="table-container auto-scroll">
+        <table class="mat-table">
+          <thead>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell">#</th>
+              <th class="mat-header-cell">{{'Name' | translate}}</th>
+              <th class="mat-header-cell">{{'Group Name' | translate}}</th>
+              <th class="mat-header-cell"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="mat-row"
+              *ngFor="let passengerType of passengerTypes | async"
+              (dblclick)="edit(passengerType)"
+            >
+              <td class="mat-cell">
+                <span class="material-symbols-outlined mat-hint alpha-50 md-20"
+                  >star</span
+                >
+              </td>
+              <td class="mat-cell">{{passengerType.name}}</td>
+              <td class="mat-cell">{{passengerType.groupName}}</td>
+              <td class="mat-cell">
+                <button mat-icon-button [matMenuTriggerFor]="entryMenu">
+                  <mat-icon fontSet="material-symbols-outlined" class="mat-hint">more_horiz</mat-icon>
+                </button>
+                <mat-menu #entryMenu="matMenu">
+                  <button mat-menu-item (click)="edit(passengerType)">
+                    <mat-icon fontSet="material-symbols-outlined">edit_note</mat-icon>
+                    <span class="mat-body-1"
+                      >{{ "View/Edit Passenger Type" | translate }}</span
+                    >
+                  </button>
+                  <button mat-menu-item (click)="delete(passengerType)">
+                    <mat-icon fontSet="material-symbols-outlined">delete_forever</mat-icon>
+                    <span class="mat-body-1"
+                      >{{ "Delete Passenger Type" | translate }}</span
+                    >
+                  </button>
+                </mat-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator pageSize="100" disabled="true"></mat-paginator>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions *ngIf="!pageLoading"></mat-card-actions>
+</mat-card>

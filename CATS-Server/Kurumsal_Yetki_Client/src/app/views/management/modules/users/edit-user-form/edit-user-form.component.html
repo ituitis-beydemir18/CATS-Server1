@@ -1,0 +1,163 @@
+<form [formGroup]="userForm">
+  <mat-card>
+    <mat-card-header class="app-dark-theme">
+      <mat-card-title
+        >{{ userId ? ("EditUserForm.Title.Edit" | translate) :
+        ("EditUserForm.Title.New" | translate) }}</mat-card-title
+      >
+      <mat-card-subtitle
+        >{{ "EditUserForm.Subtitle" | translate }}</mat-card-subtitle
+      >
+      <div fxFlex fxLayoutAlign="end center">
+        <div *ngIf="!pageLoading">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon fontSet="material-symbols-outlined">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon fontSet="material-symbols-outlined">help</mat-icon>
+              <span class="mat-body-1"
+                >{{ "Contact Support" | translate }}</span
+              >
+            </button>
+          </mat-menu>
+        </div>
+        <div *ngIf="pageLoading">
+          <mat-spinner diameter="20"></mat-spinner>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content *ngIf="!pageLoading">
+      <mat-tab-group mat-stretch-tabs animationDuration="0ms">
+        <mat-tab [label]="'User Info' | translate">
+          <div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+              <mat-form-field>
+                <input
+                  matInput
+                  [placeholder]="'User Name' | translate"
+                  formControlName="username"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  [placeholder]="'Name' | translate"
+                  formControlName="name"
+                />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+              <app-item-select
+                query="userTypes"
+                idField="id"
+                nameField="name"
+                [placeholder]="'User Type' | translate"
+                formControlName="typeId"
+              ></app-item-select>
+              <mat-form-field>
+                <input
+                  matInput
+                  [placeholder]="'Employee Id' | translate"
+                  formControlName="employeeId"
+                />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+              <mat-form-field>
+                <input
+                  matInput
+                  [placeholder]="'Job Title' | translate"
+                  formControlName="jobTitle"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  [placeholder]="'Email' | translate"
+                  formControlName="email"
+                />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+              <app-item-select
+                query="languages"
+                idField="id"
+                nameField="name"
+                [placeholder]="'Language' | translate"
+                formControlName="languageId"
+              ></app-item-select>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+              <app-item-select
+                query="airports"
+                idField="id"
+                nameField="name"
+                [placeholder]="'Airport' | translate"
+                formControlName="airportId"
+              ></app-item-select>
+            </div>
+            <div>
+              <mat-checkbox formControlName="locked" fxFlex="100">
+                <span class="mat-hint">{{"EditUserForm.UserInfoTab.LockUserCheck" | translate }}</span>
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab [label]="'System Roles' | translate">
+          <div class="auto-scroll">
+            <div class="mat-hint m-b-8">
+              {{ "EditUserForm.SystemRolesTab.Message" | translate }}
+            </div>
+            <div>
+              <app-item-selection-list
+                fxFlex="100"
+                query="roles"
+                idField="id"
+                nameField="name"
+                formControlName="roles"
+              >
+              </app-item-selection-list>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab [label]="'Airports' | translate">
+          <div class="auto-scroll">
+            <div class="mat-hint m-b-8">
+              {{ "EditUserForm.Stations.Message" | translate }}
+            </div>
+            <div>
+              <app-item-selection-list
+                fxFlex="100"
+                query="airports"
+                idField="id"
+                nameField="name"
+                formControlName="airports"
+              >
+              </app-item-selection-list>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+    <mat-card-actions fxLayoutGap="5px" *ngIf="!pageLoading">
+      <button mat-stroked-button [mat-dialog-close]="false">
+        <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+        {{ "Cancel" | translate }}
+      </button>
+      <button
+        mat-stroked-button
+        (click)="delete()"
+        *ngIf="userId"
+        [disabled]="loading"
+      >
+        <mat-icon fontSet="material-symbols-outlined">clear_all</mat-icon>
+        {{ "Delete" | translate }}
+      </button>
+      <button mat-stroked-button (click)="save()" [disabled]="loading">
+        <mat-icon fontSet="material-symbols-outlined">done_all</mat-icon>
+        {{ "Save" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

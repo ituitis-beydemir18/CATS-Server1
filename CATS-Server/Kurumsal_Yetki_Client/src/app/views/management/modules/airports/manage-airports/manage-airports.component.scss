@@ -1,0 +1,10 @@
+mat-card-header {
+  .mat-card-avatar {
+    background-image: url("/assets/images/directions.png");
+    background-size: cover;
+  }
+}
+
+.mat-cell:first-child {
+  width: 45px !important;
+}

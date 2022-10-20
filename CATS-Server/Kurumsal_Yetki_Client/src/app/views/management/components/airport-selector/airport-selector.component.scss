@@ -1,0 +1,79 @@
+mat-card-header {
+  .mat-card-avatar {
+    background-image: url("/assets/images/airport_2.png");
+    background-size: cover;
+  }
+}
+
+.mat-cell:first-child {
+  width: 45px !important;
+}
+
+.mat-list-item:hover .item-icon {
+  animation: spin 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+  opacity: 1;
+}
+
+.mat-list-item .item-icon {
+  animation: spin-reverse 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.75;
+}
+
+.content-wrapper {
+  padding: 10px 20px;
+
+  .nav-list-wrapper {
+    border: solid 1px #efefef;
+    padding: 0px;
+    height: 300px;
+    overflow: auto;
+  }
+}
+
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    color: #ffcc00;
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(90deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes colorC {
+  from {
+    background-color: #ccc;
+    color: #444;
+  }
+
+  to {
+    background-color: #4895ef;
+    color: #fff;
+  }
+}
+
+@keyframes colorR {
+  from {
+    background-color: #4895ef;
+    color: #fff;
+  }
+
+  to {
+    background-color: #ccc;
+    color: #444;
+  }
+}

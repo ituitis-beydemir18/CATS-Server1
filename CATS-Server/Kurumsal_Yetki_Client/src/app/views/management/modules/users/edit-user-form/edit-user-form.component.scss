@@ -1,0 +1,42 @@
+mat-card-content {
+  padding: 0px !important;
+
+  .items {
+    border: solid 1px #efefef;
+    border-bottom-width: 0px;
+
+    > button {
+      line-height: 150% !important;
+      padding: 0px !important;
+    }
+
+    .item {
+      white-space: normal !important;
+      text-align: left;
+      letter-spacing: 0.01em;
+      border-bottom: solid 1px #efefef;
+      border-radius: 0px !important;
+      padding: 10px 10px;
+
+      .item-name {
+        font-weight: 500;
+        font-size: 12px;
+      }
+
+      .item-title {
+        font-weight: 500;
+        font-size: 12px;
+      }
+
+      .item-subtitle {
+        font-weight: 400;
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+mat-tab-group {
+  min-width: 100% !important;
+  min-height: 525px !important;
+}

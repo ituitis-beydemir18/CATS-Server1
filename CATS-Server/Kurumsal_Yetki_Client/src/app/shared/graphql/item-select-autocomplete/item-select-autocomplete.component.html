@@ -1,0 +1,21 @@
+<mat-form-field fxFlex>
+  <input
+    type="text"
+    matInput
+    [placeholder]="placeholder"
+    [matAutocomplete]="auto"
+    [formControl]="inputCtrl"
+    (blur)="validateInput()"
+  />
+  <mat-autocomplete
+    #auto
+    autoActiveFirstOption
+    [displayWith]="displayFn"
+    (optionSelected)="optionSelected($event)"
+  >
+    <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+      <div class="mat-body-2">{{ item.name }}</div>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-spinner matSuffix [diameter]="15" *ngIf="loading"></mat-spinner>
+</mat-form-field>

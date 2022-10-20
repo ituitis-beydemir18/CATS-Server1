@@ -1,0 +1,127 @@
+<mat-sidenav-container fullscreen *ngIf="me | async; let me">
+  <mat-sidenav #sideNav opened="false">
+    <div class="logo">
+      <mat-icon fontSet="material-symbols-outlined">blur_on</mat-icon>
+      <label>{{ "Application.Title.CamelCase" | translate }}</label>
+    </div>
+    <mat-nav-list>
+      <dl
+        *ngFor="let group of (me.applications | filterBy: ['typeId']: 1) | groupBy: 'groupName' | pairs"
+      >
+        <dt>
+          <a mat-list-item>
+            <span>{{ group[0] | translate }}</span>
+          </a>
+        </dt>
+        <dd *ngFor="let app of group[1]">
+          <a mat-list-item [routerLink]="app.pageUrl" (click)="sideNav.close()">
+            <span class="material-symbols-outlined mat-hint">
+              {{ app.iconUrl }}
+            </span>
+            <span class="mat-caption mat-hint">{{ app.name | translate }}</span>
+          </a>
+        </dd>
+      </dl>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <header>
+      <mat-toolbar fxFlex class="app-dark-theme">
+        <div fxFlex="75px" fxLayoutAlign="center center">
+          <button mat-icon-button (click)="sideNav.toggle()">
+            <mat-icon fontSet="material-symbols-outlined">menu</mat-icon>
+          </button>
+        </div>
+        <div fxFlex fxLayoutAlign="start center">
+          <div
+            fxFlex="50"
+            fxLayoutAlign="start center"
+            (click)="homePage()"
+            class="logo"
+          >
+            <div class="icon"></div>
+            <label fxShow.xs="false" fxShow="true">
+              {{ "Application.Title2" | translate }}
+            </label>
+            <label fxShow.xs="true" fxShow="false">
+              {{ "Application.Title.Short" | translate }}
+            </label>
+          </div>
+
+          <div fxFlex="50" fxLayoutAlign="end center">
+            <!-- <div *ngIf="me.airport">
+              <button mat-button (click)="switchAirport()">
+                <mat-icon fontSet="material-symbols-outlined">place</mat-icon>
+                <span
+                  >&nbsp;{{me.airport.name + ' (' + me.airport.code +
+                  ')'}}</span
+                >
+                <mat-icon fontSet="material-symbols-outlined">expand_more</mat-icon>
+              </button>
+            </div> -->
+
+            <div *ngIf="me">
+              <button
+                mat-button
+                [matMenuTriggerFor]="profileMenu"
+                matTooltip="Accout Settings"
+                matTooltipPosition="below"
+              >
+                <mat-icon fontSet="material-symbols-outlined">account_circle</mat-icon>
+                {{me.name}}
+                <mat-icon fontSet="material-symbols-outlined">expand_more</mat-icon>
+              </button>
+              <mat-menu #profileMenu="matMenu">
+                <button (click)="requestSupport()" mat-menu-item>
+                  <mat-icon fontSet="material-symbols-outlined">support_agent</mat-icon>
+                  {{ "Contact Support" | translate }}
+                </button>
+                <mat-divider></mat-divider>
+                <button
+                  *ngFor="let lang of languages | async"
+                  (click)="switchLanguage(lang)"
+                  mat-menu-item
+                >
+                  <mat-icon fontSet="material-symbols-outlined">translate</mat-icon>
+                  {{ lang.name | translate }}
+                </button>
+                <mat-divider></mat-divider>
+                <button (click)="logout()" mat-menu-item>
+                  <mat-icon fontSet="material-symbols-outlined">power_settings_new</mat-icon>
+                  {{ "Logout" | translate }}
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <div class="custom-shape-divider-top-1642970661">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                opacity=".25"
+                class="shape-fill"
+              ></path>
+              <path
+                d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                opacity=".5"
+                class="shape-fill"
+              ></path>
+              <path
+                d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                class="shape-fill"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </mat-toolbar>
+    </header>
+
+    <router-outlet></router-outlet>
+    <footer></footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

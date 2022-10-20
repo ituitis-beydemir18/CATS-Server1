@@ -1,0 +1,159 @@
+<mat-card>
+  <mat-card-header>
+    <ngx-avatar mat-card-avatar></ngx-avatar>
+    <mat-card-title>{{ "ManageUsers.Title" | translate }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ "ManageUsers.Subtitle" | translate }}</mat-card-subtitle
+    >
+    <div fxFlex fxLayoutAlign="end center">
+      <div *ngIf="!pageLoading">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon fontSet="material-symbols-outlined">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon fontSet="material-symbols-outlined">get_app</mat-icon>
+            <span class="mat-body-1"
+              >{{ "Export to Excel File (*.xls)" | translate }}</span
+            >
+          </button>
+        </mat-menu>
+      </div>
+      <div *ngIf="pageLoading">
+        <mat-spinner diameter="20"></mat-spinner>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content [hidden]="pageLoading">
+    <div>
+      <div fxLayout="row wrap">
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
+          <button mat-button (click)="refresh()" [disabled]="loading">
+            <mat-icon fontSet="material-symbols-outlined">refresh</mat-icon>
+            {{ "Refresh" | translate }}
+          </button>
+          <button mat-button (click)="editUser()">
+            <mat-icon fontSet="material-symbols-outlined"
+              >playlist_add</mat-icon
+            >
+            {{ "New User" | translate }}
+          </button>
+          <button mat-button disabled>
+            <mat-icon fontSet="material-symbols-outlined">filter_list</mat-icon>
+            {{ "Advanced Search" | translate }}
+          </button>
+        </div>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
+          <mat-form-field required>
+            <input
+              matInput
+              [formControl]="keyword"
+              [value]="keyword.value"
+              (keyup.enter)="filterUsers()"
+              placeholder="{{ 'Keywords' | translate }}"
+              class="suffixOffset"
+              type="search"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              [hidden]="!keyword.value || loading"
+              (click)="clearSearchBox()"
+            >
+              <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+            </button>
+            <mat-spinner
+              [hidden]="!loading"
+              diameter="15"
+              matSuffix
+            ></mat-spinner>
+            <mat-label>
+              <mat-icon fontSet="material-symbols-outlined">search</mat-icon>
+              {{ "Filter Records" | translate }}
+            </mat-label>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="table-container auto-scroll">
+        <table class="mat-table">
+          <thead>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell">#</th>
+              <th class="mat-header-cell">{{'Username' | translate}}</th>
+              <th class="mat-header-cell">{{'Name' | translate}}</th>
+              <th class="mat-header-cell">{{'Type' | translate}}</th>
+              <th class="mat-header-cell">{{'Job Title' | translate}}</th>
+              <th class="mat-header-cell">{{'Email' | translate}}</th>
+              <th class="mat-header-cell"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="mat-row"
+              *ngFor="let user of users | async"
+              (dblclick)="editUser(user.id)"
+            >
+              <td class="mat-cell">
+                <span
+                  class="material-symbols-outlined mat-hint alpha-50 md-20"
+                  *ngIf="!user.locked"
+                  >person</span
+                >
+                <span
+                  class="material-symbols-outlined mat-warn alpha-75 md-20"
+                  *ngIf="user.locked"
+                  >person_off</span
+                >
+              </td>
+              <td class="mat-cell">{{user.username}}</td>
+              <td class="mat-cell">{{user.name}}</td>
+              <td class="mat-cell">{{user.type?.name}}</td>
+              <td class="mat-cell">
+                {{ user.jobTitle | slice: 0:45 }}
+                <span *ngIf="user.jobTitle?.length > 45">...</span>
+              </td>
+              <td class="mat-cell">
+                {{ user.email | slice: 0:45 }}
+                <span *ngIf="user.email?.length > 45">...</span>
+              </td>
+              <td class="mat-cell">
+                <button mat-icon-button [matMenuTriggerFor]="entryMenu">
+                  <mat-icon fontSet="material-symbols-outlined" class="mat-hint"
+                    >more_horiz</mat-icon
+                  >
+                </button>
+                <mat-menu #entryMenu="matMenu">
+                  <button mat-menu-item (click)="editUser(user.id)">
+                    <mat-icon fontSet="material-symbols-outlined"
+                      >visibility</mat-icon
+                    >
+                    <span class="mat-body-1"
+                      >{{ "View/Edit User Info" | translate }}</span
+                    >
+                  </button>
+                  <button mat-menu-item (click)="deleteUser(user.id)">
+                    <mat-icon fontSet="material-symbols-outlined"
+                      >delete_forever</mat-icon
+                    >
+                    <span class="mat-body-1"
+                      >{{ "Delete User" | translate }}</span
+                    >
+                  </button>
+                </mat-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          [pageSize]="pageSize"
+          [length]="totalCount"
+          [disabled]="loading"
+          (page)="changePage($event)"
+        ></mat-paginator>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions *ngIf="!pageLoading"></mat-card-actions>
+</mat-card>

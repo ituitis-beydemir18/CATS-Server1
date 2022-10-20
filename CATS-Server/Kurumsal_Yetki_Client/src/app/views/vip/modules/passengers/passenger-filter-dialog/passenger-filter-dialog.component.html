@@ -1,0 +1,170 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap="5px"
+  class="mat-dialog-preloader"
+  *ngIf="pageLoading"
+>
+  <mat-spinner diameter="20"></mat-spinner>
+  <span>{{'Loading...' | translate}}</span>
+</div>
+<form [formGroup]="filterForm" *ngIf="!pageLoading">
+  <h2 mat-dialog-title>
+    {{'Advanced Search' | translate}}
+    <p class="mat-body-2">{{'AdvancedSearchDialog.Subtitle' | translate}}</p>
+  </h2>
+  <mat-dialog-content>
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+        <mat-form-field fxFlex="100">
+          <input
+            matInput
+            [placeholder]="'PNR Number' | translate"
+            formControlName="pnrNumber"
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [placeholder]="'Name' | translate"
+            formControlName="name"
+          />
+        </mat-form-field>
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [placeholder]="'Surname' | translate"
+            formControlName="surname"
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [placeholder]="'Airline' | translate"
+            formControlName="airlineCode"
+          />
+        </mat-form-field>
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [placeholder]="'Flight Number' | translate"
+            formControlName="flightNumber"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [ngxMatDatetimePicker]="pickerFlightStartDate"
+            placeholder="{{'Flight Start Date' | translate}}"
+            name="pickerFlightStartDate"
+            formControlName="flightStartDate"
+          />
+          <mat-datepicker-toggle matSuffix [for]="pickerFlightStartDate">
+          </mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #pickerFlightStartDate [showSeconds]="false">
+            <ng-template>
+              <span>OK</span>
+            </ng-template>
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [ngxMatDatetimePicker]="pickerFlightEndDate"
+            placeholder="{{'Flight End Date' | translate}}"
+            name="pickerFlightEndDate"
+            formControlName="flightEndDate"
+          />
+          <mat-datepicker-toggle matSuffix [for]="pickerFlightEndDate">
+          </mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #pickerFlightEndDate [showSeconds]="false">
+            <ng-template>
+              <span>OK</span>
+            </ng-template>
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [placeholder]="'Flight From' | translate"
+            formControlName="flightFrom"
+          />
+        </mat-form-field>
+        <mat-form-field fxFlex="50">
+          <input
+            matInput
+            [placeholder]="'Flight To' | translate"
+            formControlName="flightTo"
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+        <app-item-select-multiple
+          query="passengerTypes"
+          idField="id"
+          nameField="name"
+          groupField="groupName"
+          [placeholder]="'Type' | translate"
+          formControlName="typeId"
+        ></app-item-select-multiple>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px grid">
+        <mat-form-field>
+          <mat-select
+            [placeholder]="'Staff Assignment' | translate"
+            formControlName="staffAssigned"
+          >
+            <mat-option [value]="false">{{'Waiting' | translate}}</mat-option>
+            <mat-option [value]="true">{{'Assigned' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <app-item-select-autocomplete
+          query="users"
+          idField="name"
+          nameField="name"
+          [placeholder]="'Staff' | translate"
+          formControlName="assignedStaff"
+          pagingEnabled="true"
+          enableFreeText="true"
+          appUpperCase
+        ></app-item-select-autocomplete>
+      </div>
+      <div fxLayout="column" fxLayoutGap="10px grid">
+        <mat-form-field>
+          <mat-select
+            [placeholder]="'Status' | translate"
+            formControlName="status"
+            multiple
+          >
+            <mat-option value="WAITING">{{'Waiting' | translate}}</mat-option>
+            <mat-option value="VIP_USED">{{'VIP Services Used' | translate}}</mat-option>
+            <mat-option value="VIP_NOT_USED">{{'VIP Services Skipped' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">
+      {{'Cancel' | translate}}
+    </button>
+    <button mat-button (click)="filterForm.reset()">
+      {{'Clear' | translate}}
+    </button>
+    <button mat-button (click)="reset()">
+      {{'Reset' | translate}}
+    </button>
+    <button mat-button (click)="apply()" cdkFocusInitial>
+      {{'Apply' | translate}}
+    </button>
+  </mat-dialog-actions>
+</form>

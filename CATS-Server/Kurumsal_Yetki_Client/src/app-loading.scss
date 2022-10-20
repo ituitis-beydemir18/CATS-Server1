@@ -1,0 +1,23 @@
+.app-loading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding-top: 200px;
+
+  div {
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .pre-loading {
+    height: 100px;
+    width: 100px;
+    background-image: url(assets/images/preloading2.gif);
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+}

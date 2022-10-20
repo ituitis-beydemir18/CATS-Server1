@@ -1,0 +1,31 @@
+<form>
+  <h2 mat-dialog-title>
+    <span>{{'Languages' | translate}}</span>
+    <p class="mat-body-2">{{'ManageLanguagesDialog.Info' | translate}}</p>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <mat-list>
+      <mat-list-item *ngFor="let language of languages | async">
+        <p mat-line>
+          <span class="mat-body-2"
+            >{{language.name + ' (' + language.code + ')'}}</span
+          >
+        </p>
+        <button mat-icon-button (click)="delete(language)">
+          <mat-icon class="mat-20">delete_forever</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions align="center" *ngIf="state == States.init">
+    <button mat-button cdkFocusInitial (click)="state = States.newLanguage">
+      <mat-icon fontSet="material-symbols-outlined">playlist_add</mat-icon>
+      {{'Add New Language' | translate}}
+    </button>
+  </mat-dialog-actions>
+</form>
+<app-edit-language-form
+  *ngIf="state == States.newLanguage"
+  (changed)="editLanguageFormChanged($event)"
+></app-edit-language-form>

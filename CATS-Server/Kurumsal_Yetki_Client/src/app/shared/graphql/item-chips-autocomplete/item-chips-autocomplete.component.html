@@ -1,0 +1,26 @@
+<mat-form-field>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let item of items" (removed)="remove(item)">
+      {{item.name}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input
+      #searchInput
+      [placeholder]="placeholder"
+      [formControl]="inputCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      (blur)="validateInput()"
+    />
+  </mat-chip-list>
+  <mat-autocomplete
+    #auto
+    autoActiveFirstOption
+    (optionSelected)="add($event.option.value)"
+  >
+    <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+      <div class="mat-body-2">{{ item.name }}</div>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-spinner matSuffix [diameter]="15" *ngIf="loading"></mat-spinner>
+</mat-form-field>

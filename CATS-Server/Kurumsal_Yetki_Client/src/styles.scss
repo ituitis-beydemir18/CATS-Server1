@@ -1,0 +1,515 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// Common styles for Angular Material
+@include mat.core();
+
+// @import 'material-symbols';
+@import "material-symbols/outlined.css";
+
+//@import 'material-icons/iconfont/material-icons.css';
+@import 'material-icons/iconfont/filled.css';
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat.define-palette(mat.$grey-palette, 800);
+$app-accent: mat.define-palette(mat.$yellow-palette, 600);
+$app-warn: mat.define-palette(mat.$red-palette);
+$app-success: mat.define-palette(mat.$green-palette, 500);
+$app-theme: mat.define-light-theme($app-primary, $app-accent, $app-warn);
+$app-foreground: map-get($app-theme, foreground);
+
+// Define an alternate dark theme.
+$app-dark-primary: mat.define-palette(mat.$blue-palette, 900);
+$app-dark-accent: mat.define-palette(mat.$red-palette);
+$app-dark-warn: mat.define-palette(mat.$red-palette);
+$app-dark-success: mat.define-palette(mat.$green-palette, 500);
+$app-dark-theme: mat.define-dark-theme($app-dark-primary,
+    $app-dark-accent,
+    $app-dark-warn);
+$app-dark-foreground: map-get($app-dark-theme, foreground);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($app-theme);
+
+.app-dark-theme {
+  @include mat.all-component-themes($app-dark-theme);
+  background-color: mat.get-color-from-palette($app-dark-primary);
+  color: mat.get-color-from-palette($app-dark-foreground, text);
+
+  .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: #ffffff;
+  }
+}
+
+// Roboto Fonts and material-symbols
+@font-face {
+  font-family: "Roboto";
+  src: url(assets/fonts/roboto/Roboto-Medium.ttf);
+  /* IE9 Compat Modes */
+}
+
+/* TYPOGRAPHY */
+.mat-default,
+.default {
+  color: #333333 !important;
+}
+
+.mat-primary,
+.primary {
+  color: mat.get-color-from-palette($app-primary);
+}
+
+.mat-dark-primary,
+.dark-primary {
+  color: mat.get-color-from-palette($app-dark-primary);
+}
+
+.mat-accent,
+.accent {
+  color: mat.get-color-from-palette($app-accent);
+}
+
+.mat-accent-bg,
+.accent-bg {
+  background-color: mat.get-color-from-palette($app-accent);
+}
+
+.mat-warn,
+.warn {
+  color: mat.get-color-from-palette($app-warn) !important;
+}
+
+.mat-success,
+.success {
+  color: mat.get-color-from-palette($app-success) !important;
+}
+
+.mat-alpha-75,
+.alpha-75 {
+  opacity: 0.75 !important;
+}
+
+.mat-alpha-50,
+.alpha-50 {
+  opacity: 0.5 !important;
+}
+
+.mat-alpha-25,
+.alpha-25 {
+  opacity: 0.25 !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: mat.get-color-from-palette($app-foreground, text) !important;
+  font-weight: 400;
+  font-size: 13px;
+  overflow: hidden;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+input {
+  font-family: Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+div.auto-scroll {
+  overflow: auto;
+}
+
+label {
+  vertical-align: middle;
+
+  span,
+  i,
+  mat-icon,
+  .material-symbols {
+    vertical-align: middle;
+  }
+}
+
+/* MAT-TABLE HACKS */
+table.mat-table {
+  border-spacing: 0;
+}
+
+tr.mat-header-row,
+tr.mat-row,
+tr.mat-footer-row {
+  height: 35px;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  text-align: left;
+  font-size: 12px;
+  padding: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  vertical-align: middle;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  text-align: center;
+  vertical-align: middle;
+}
+
+th.mat-header-cell:last-of-type,
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type {
+  text-align: right;
+  padding-right: 10px;
+}
+
+/* NG-IF alternates */
+[hidden] {
+  display: none !important;
+}
+
+/* CDK HACK */
+.cdk-overlay-pane {
+  display: block;
+}
+
+.cdk-global-scrollblock {
+  position: initial;
+  width: initial;
+  overflow: hidden;
+}
+
+/* TYPOGRAPHY */
+.mat-alpha-75,
+.alpha-75 {
+  opacity: 0.75 !important;
+}
+
+.mat-alpha-50,
+.alpha-50 {
+  opacity: 0.5 !important;
+}
+
+.mat-alpha-25,
+.alpha-25 {
+  opacity: 0.25 !important;
+}
+
+/* MATERIAL-CARD */
+.mat-card {
+  padding: 0px !important;
+
+  .mat-card-header {
+    padding: 20px !important;
+
+    .mat-card-avatar {
+      margin-top: -2px !important;
+      width: 45px !important;
+      height: 45px !important;
+      border-radius: 4px !important;
+
+      .md-text {
+        background-color: mat.get-color-from-palette($app-primary);
+        color: #ffffff;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        width: 36px !important;
+        height: 36px !important;
+        line-height: 36px !important;
+      }
+    }
+
+    .mat-card-title {
+      margin-bottom: 12px !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+
+      div,
+      span {
+        line-height: 14px !important;
+      }
+    }
+
+    .mat-card-subtitle {
+      margin-bottom: 0px !important;
+    }
+  }
+
+  .mat-card-content {
+    padding: 0px 20px !important;
+    margin: 0px !important;
+
+    .mat-form-field {
+      width: 100% !important;
+    }
+
+    .mat-table {
+      width: 100% !important;
+    }
+
+    .mat-row:hover {
+      background: #f5f5f5 !important;
+      cursor: pointer !important;
+    }
+
+    .mat-cell,
+    .mat-header-cell,
+    .mat-footer-cell {
+      white-space: nowrap !important;
+      word-wrap: none !important;
+
+      /* MAT-BUTTONS */
+      .mat-icon-button {
+        width: 35px !important;
+        height: 35px !important;
+        line-height: 35px !important;
+      }
+    }
+  }
+
+  .mat-card-actions {
+    padding: 20px !important;
+    text-align: center;
+  }
+}
+
+.mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+/* MATERIAL-TOOLBAR */
+.mat-toolbar:not([class*="mat-elevation-z"]) {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.material-symbols.md-12 {
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+
+.material-symbols.md-14 {
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+}
+
+.material-symbols.md-16,
+.material-symbols-outlined.md-16 {
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 16px !important;
+}
+
+.material-symbols.md-18,
+.material-symbols-outlined.md-18 {
+  width: 18px !important;
+  height: 18px !important;
+  font-size: 18px !important;
+}
+
+.material-symbols.md-20,
+.material-symbols-outlined.md-20 {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px !important;
+}
+
+.material-symbols.alpha-50 {
+  opacity: 0.5;
+}
+
+.material-symbols.alpha-75 {
+  opacity: 0.75;
+}
+
+.material-symbols.rotate-45 {
+  transform: rotate(45deg);
+}
+
+.material-symbols.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.material-symbols.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.material-symbols.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.material-symbols.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+
+.material-symbols.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.mat-slide-toggle.mat-accent.mat-checked:not(.mat-disabled) .mat-hint {
+  color: mat.get-color-from-palette($app-accent);
+}
+
+.mat-slide-toggle.mat-accent.mat-checked:not(.mat-disabled) .mat-hint {
+  color: mat.get-color-from-palette($app-accent);
+}
+
+/* MAT-NAV-LIST */
+.mat-nav-list[dense] .mat-list-icon {
+  font-size: 22px !important;
+}
+
+.mat-list-base[dense] .mat-list-icon {
+  font-size: 22px !important;
+}
+
+/* MAT-DIALOG */
+.mat-dialog-container {
+  max-height: 100vh !important;
+  overflow: visible !important;
+
+  /* Divider */
+  .mat-divider {
+    margin: 0px -24px !important;
+  }
+
+  .mat-dialog-content {
+    overflow: visible !important;
+  }
+
+  /* Card */
+  .mat-card {
+    margin: -24px !important;
+
+    .mat-card-content {
+      padding: 0px !important;
+    }
+
+    .mat-card-actions {
+      margin: 0px !important;
+    }
+  }
+
+  /* Tab group */
+  .mat-tab-group {
+    .mat-tab-body-content {
+      height: auto;
+      padding: 30px !important;
+    }
+  }
+
+  /* Form fields */
+  .mat-form-field {
+    width: 100% !important;
+  }
+}
+
+/* MARGINS  */
+.m-4 {
+  margin: 4px;
+}
+
+.m-8 {
+  margin: 8px;
+}
+
+.m-10 {
+  margin: 10px;
+}
+
+.m-20 {
+  margin: 20px;
+}
+
+.m-l-4 {
+  margin-left: 4px;
+}
+
+.m-l-8 {
+  margin-left: 8px;
+}
+
+.m-l-10 {
+  margin-left: 10px;
+}
+
+.m-b-0 {
+  margin-bottom: 0px !important;
+}
+
+.m-b-4 {
+  margin-bottom: 4px;
+}
+
+.m-b-8 {
+  margin-bottom: 8px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.m-t-0 {
+  margin-top: 0px !important;
+}
+
+.m-t-4 {
+  margin-top: 4px;
+}
+
+.m-t-8 {
+  margin-top: 8px;
+}
+
+.mat-form-field-none {
+  .mat-form-field-wrapper {
+    padding: 0px !important;
+  }
+}
+
+.mat-autocomplete-panel {
+  height: auto !important;
+  max-height: 1024px !important;
+  box-shadow: none !important;
+  top: 15px !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 1px 3px 0 rgba(0, 0, 0, 0.3),
+    0 0 0 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Smooth Scrollbar - Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-right: 2px white solid;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}

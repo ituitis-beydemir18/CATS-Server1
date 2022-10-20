@@ -1,0 +1,45 @@
+.mat-dialog-title {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+
+  > * {
+    margin-top: 10px;
+  }
+
+  .custom-preloader-1 {
+    height: 200px;
+    width: 250px;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48 !important;
+    font-size: 48px !important;
+  }
+
+  .mat-icon {
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+.mat-dialog-content {
+  white-space: pre-wrap;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+
+  > div:first {
+    margin-bottom: 10px;
+  }
+}
+
+.mat-dialog-actions {
+  justify-content: center;
+}
