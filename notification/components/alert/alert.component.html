@@ -1,0 +1,54 @@
+<content>
+  <div mat-dialog-title>
+    <mat-icon fontSet="material-symbols-outlined" [color]="color" *ngIf="icon"
+      >{{icon}}</mat-icon
+    >
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="45"
+      *ngIf="preloader && (preloader == 'spinner')"
+    ></mat-progress-spinner>
+    <div
+      [class]="preloader"
+      *ngIf="preloader && preloader.includes('custom')"
+    ></div>
+    <div [class]="color" *ngIf="title">
+      <span> {{title | translate}}</span>
+    </div>
+  </div>
+  <mat-dialog-content *ngIf="subtitle || content">
+    <div class="mat-body-2 mat-hint">{{subtitle | translate}}</div>
+    <div class="mat-body-2 mat-hint">{{content | translate }}</div>
+    <div *ngIf="allowComment">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Would you like to add comment?"
+          [(ngModel)]="comments"
+        />
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions *ngIf="buttons">
+    <button *ngIf="buttons.includes('OK')" [mat-dialog-close]="true" mat-button>
+      {{'OK' | translate}}
+    </button>
+    <button
+      *ngIf="buttons.includes('Yes')"
+      [mat-dialog-close]="true"
+      mat-button
+    >
+      {{'Yes' | translate}}
+    </button>
+    <button
+      *ngIf="buttons.includes('No')"
+      [mat-dialog-close]="false"
+      mat-button
+    >
+      {{'No' | translate}}
+    </button>
+    <button *ngIf="buttons.includes('Cancel')" mat-dialog-close mat-button>
+      {{'Cancel' | translate}}
+    </button>
+  </mat-dialog-actions>
+</content>
