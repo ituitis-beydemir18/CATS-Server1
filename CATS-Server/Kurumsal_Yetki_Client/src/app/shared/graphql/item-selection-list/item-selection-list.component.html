@@ -1,8 +1,0 @@
-<mat-selection-list dense [formControl]="listCtrl" [multiple]="multiple">
-  <mat-list-option *ngFor="let item of items | async" [value]="item.id">
-    <h2 class="mat-primary" matLine>{{ item.name }}</h2>
-    <p matLine class="mat-caption mat-hint" *ngIf="descriptionField">
-      <span>{{ item.description | translate }}</span>
-    </p>
-  </mat-list-option>
-</mat-selection-list>
