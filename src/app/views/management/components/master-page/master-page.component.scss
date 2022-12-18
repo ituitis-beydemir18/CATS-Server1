@@ -1,0 +1,263 @@
+// SIDENAV
+.mat-sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.mat-sidenav {
+  width: 275px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #efefef;
+    box-sizing: border-box;
+    height: 56px;
+    position: relative;
+    font-weight: 500;
+  }
+
+  .logo > * {
+    vertical-align: middle;
+  }
+
+  @media screen and (max-width: 600px) {
+    .mat-sidenav .logo {
+      height: 56px;
+    }
+  }
+}
+
+// NAVIGATION
+.mat-nav-list {
+  .mat-list-item {
+    height: 35px;
+  }
+
+  a {
+    font-size: 13px;
+  }
+
+  dt a {
+    font-weight: 500;
+  }
+
+  dd {
+    margin: 0px;
+  }
+
+  dt a span {
+    margin-left: 20px;
+  }
+
+  dd a span {
+    margin-left: 20px;
+  }
+
+  .material-symbols-outlined {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+}
+
+// TOOLBAR
+.mat-toolbar {
+  position: fixed;
+  z-index: 1001;
+  box-shadow: 2px 10px 10px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .logo {
+    cursor: pointer;
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      background-image: url("/assets/images/thy_logo_red.png");
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      background-position: 50% 50%;
+      margin-right: 5px;
+    }
+
+    label {
+      font-size: 15px;
+      cursor: pointer;
+    }
+  }
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 55px !important;
+  padding-left: 0px !important;
+}
+
+// SEARCH TOOLBAR
+.search-toolbar {
+  overflow: hidden;
+  background-color: #fff !important;
+
+  .input-wrapper {
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+
+    label::before {
+      content: attr(title);
+      position: absolute;
+      font-size: 18px;
+      width: 100%;
+      color: #777;
+      transition: top 200ms 0ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    input {
+      border-width: 0px;
+      outline: none;
+      font-size: 18px;
+      width: 100%;
+      height: 100%;
+      margin: 0px !important;
+      padding: 0px !important;
+      color: #555;
+      transition: top 200ms 0ms cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:valid + label::before {
+        content: attr(data-title);
+      }
+      &:focus + label::before {
+        top: 1px;
+        left: 0px;
+      }
+    }
+  }
+  .close-button:hover {
+    animation: spin 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: both;
+  }
+}
+
+.mat-option {
+  min-height: 48px !important;
+  line-height: 1.15 !important;
+  height: auto !important;
+  padding: 8px 16px !important;
+  white-space: normal !important;
+}
+
+.mat-option:hover .item-icon {
+  animation: spin 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+  opacity: 1;
+}
+
+.mat-option .item-icon {
+  animation: spin-reverse 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.75;
+}
+
+// ANIMATIONS
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    color: #ffcc00;
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes colorC {
+  from {
+    background-color: #ccc;
+    color: #444;
+  }
+  to {
+    background-color: #4895ef;
+    color: #fff;
+  }
+}
+
+@keyframes colorR {
+  from {
+    background-color: #4895ef;
+    color: #fff;
+  }
+  to {
+    background-color: #ccc;
+    color: #444;
+  }
+}
+
+span.badge {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 3px 6px;
+  background-color: #ccc;
+  border-radius: 4px;
+  animation: colorR 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mat-option:hover .badge {
+  animation: colorC 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.items-container {
+  position: relative;
+  min-height: 100px !important;
+}
+
+.connected-apps-wrapper {
+  max-height: 350px;
+}
+
+.custom-shape-divider-top-1642970661 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: -1;
+}
+
+.custom-shape-divider-top-1642970661 svg {
+  position: relative;
+  display: block;
+  width: calc(181% + 1.3px);
+  height: 79px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1642970661 .shape-fill {
+  fill: #2862bb;
+}
+
+.search-button {
+  color: #fff !important;
+  border-radius: 20px !important;
+  border: solid 1px rgba(255, 255, 255, 0.5) !important;
+}
+
+
